@@ -5,6 +5,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
+
+
 @Document
 @Data
 public class Post {
@@ -20,4 +23,15 @@ public class Post {
 
     @Field
     private String content;
+
+    @Field
+    private List<Comment> comments;
+
+    public void addComment(Comment comment) {
+        if (comments == null) {
+            comments = List.of(comment);
+        } else {
+            comments.add(comment);
+        }
+    }
 }

@@ -4,6 +4,7 @@ import com.jochman.zti.auth.model.request.UserRequest;
 import com.jochman.zti.auth.model.response.AuthTokenResponse;
 import com.jochman.zti.auth.repository.User;
 import com.jochman.zti.auth.repository.UserRepository;
+import io.micrometer.observation.ObservationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,11 @@ public class AuthenticationService {
 
     private Optional<AuthTokenResponse> getAuthToken(User user) {
         return Optional.of(new AuthTokenResponse(jwtService.generateToken(user)));
+    }
+
+    public Optional<AuthTokenResponse> getToken(UserRequest userRequest) {
+        var user = userRepository.findByEmailAndPassword(userRequest.email(), userRequest.password());
+        return user
+                .flatMap(this::getAuthToken);
     }
 }

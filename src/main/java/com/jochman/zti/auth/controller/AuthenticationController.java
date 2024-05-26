@@ -23,4 +23,11 @@ public class AuthenticationController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
+
+    @PostMapping("/authorize")
+    public ResponseEntity<AuthTokenResponse> getToken(@RequestBody UserRequest userRequest) {
+        return authenticationService.getToken(userRequest)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
 }
