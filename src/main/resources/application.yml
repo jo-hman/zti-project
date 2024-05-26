@@ -1,0 +1,10 @@
+spring.application.name: zti
+
+spring:
+  data:
+    mongodb:
+      user: jochman
+      password: UNvfPWLDHBVpc3rM
+      database: Cluster0
+#      uri: mongodb+srv://jochman:UNvfPWLDHBVpc3rM@cluster0.ry6wt0n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+

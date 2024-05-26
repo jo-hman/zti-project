@@ -9,5 +9,5 @@ public class ZtiApplication {
     public static void main(String[] args) {
         SpringApplication.run(ZtiApplication.class, args);
     }
-//db user and pass jochman UNvfPWLDHBVpc3rM
+
 }
