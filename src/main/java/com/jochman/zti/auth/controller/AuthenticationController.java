@@ -2,13 +2,13 @@ package com.jochman.zti.auth.controller;
 
 import com.jochman.zti.auth.model.request.UserRequest;
 import com.jochman.zti.auth.model.response.AuthTokenResponse;
+import com.jochman.zti.auth.model.response.UserResponse;
 import com.jochman.zti.auth.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("users")
 @RestController
@@ -29,5 +29,11 @@ public class AuthenticationController {
         return authenticationService.getToken(userRequest)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserResponse>> getUsers() {
+        return ResponseEntity.ok(authenticationService.getUsers().stream()
+                .map(user -> new UserResponse(user.getId(), user.getEmail())).toList());
     }
 }

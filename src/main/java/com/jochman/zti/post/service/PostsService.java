@@ -3,12 +3,10 @@ package com.jochman.zti.post.service;
 import com.jochman.zti.auth.repository.User;
 import com.jochman.zti.post.model.request.CommentRequest;
 import com.jochman.zti.post.model.request.PostRequest;
-import com.jochman.zti.post.model.response.PostsResponse;
 import com.jochman.zti.post.repository.Comment;
 import com.jochman.zti.post.repository.Post;
 import com.jochman.zti.post.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

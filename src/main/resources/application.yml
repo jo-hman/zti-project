@@ -1,5 +1,8 @@
 spring.application.name: zti
 
+server:
+  port: ${PORT:8080}
+
 spring:
   data:
     mongodb:

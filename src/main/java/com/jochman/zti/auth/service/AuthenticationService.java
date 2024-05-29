@@ -2,12 +2,15 @@ package com.jochman.zti.auth.service;
 
 import com.jochman.zti.auth.model.request.UserRequest;
 import com.jochman.zti.auth.model.response.AuthTokenResponse;
+import com.jochman.zti.auth.model.response.UserResponse;
 import com.jochman.zti.auth.repository.User;
 import com.jochman.zti.auth.repository.UserRepository;
 import io.micrometer.observation.ObservationFilter;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,5 +40,9 @@ public class AuthenticationService {
         var user = userRepository.findByEmailAndPassword(userRequest.email(), userRequest.password());
         return user
                 .flatMap(this::getAuthToken);
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 }
