@@ -10,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Represents a user entity in the database.
+ */
 @Document
 @Data
 public class User implements UserDetails {

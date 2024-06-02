@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Service class for handling authentication-related operations.
+ */
 @Service
 @AllArgsConstructor
 public class AuthenticationService {
@@ -21,6 +24,11 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
 
+    /**
+     * Creates a new user and generates an authentication token.
+     * @param userRequest the user request object containing user details
+     * @return an optional containing an authentication token response if successful, otherwise empty
+     */
     public Optional<AuthTokenResponse> createUser(UserRequest userRequest) {
         return userRepository.findByEmail(userRequest.email())
                 .map(user -> Optional.<AuthTokenResponse>empty())
@@ -36,12 +44,21 @@ public class AuthenticationService {
         return Optional.of(new AuthTokenResponse(jwtService.generateToken(user)));
     }
 
+    /**
+     * Retrieves an authentication token for an existing user.
+     * @param userRequest the user request object containing user credentials
+     * @return an optional containing an authentication token response if successful, otherwise empty
+     */
     public Optional<AuthTokenResponse> getToken(UserRequest userRequest) {
         var user = userRepository.findByEmailAndPassword(userRequest.email(), userRequest.password());
         return user
                 .flatMap(this::getAuthToken);
     }
 
+    /**
+     * Retrieves a list of all users.
+     * @return a list of users
+     */
     public List<User> getUsers() {
         return userRepository.findAll();
     }

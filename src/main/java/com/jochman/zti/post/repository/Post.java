@@ -7,7 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
-
+/**
+ * Represents a post entity in the database.
+ */
 @Document
 @Data
 public class Post {
@@ -27,6 +29,10 @@ public class Post {
     @Field
     private List<Comment> comments;
 
+    /**
+     * Adds a comment to the post.
+     * @param comment the comment to add
+     */
     public void addComment(Comment comment) {
         if (comments == null) {
             comments = List.of(comment);

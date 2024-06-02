@@ -1,4 +1,3 @@
-
 package com.jochman.zti.auth.config;
 
 import org.springframework.context.annotation.Bean;
@@ -19,6 +18,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
+/**
+ * Configuration class for security settings.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -33,6 +35,12 @@ public class SecurityConfig {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
+    /**
+     * Defines the security filter chain.
+     * @param http the HttpSecurity object to configure security settings
+     * @return the configured SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -50,11 +58,15 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Defines the CORS configuration source.
+     * @return the configured CorsConfigurationSource
+     */
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000,https://zti-project-frontend.vercel.app"));
         configuration.setAllowedMethods(List.of("GET","POST"));
         configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
 
@@ -64,6 +76,4 @@ public class SecurityConfig {
 
         return source;
     }
-
-
 }
